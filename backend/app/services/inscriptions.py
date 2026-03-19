@@ -193,11 +193,6 @@ def request_desistement(*, db: Session, user: User, demande_id: int, reason: str
     )
     if not demande:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Demande introuvable.")
-    if not demande.is_selection_finale:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Désistement impossible : l’enfant n’est pas dans la liste finale.",
-        )
     if demande.desistement is not None:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Désistement déjà demandé.")
 
